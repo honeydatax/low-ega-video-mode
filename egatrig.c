@@ -18,21 +18,53 @@ void setcolor(color);
 void rect(rectx,recty,rectx1,recty1,color);
 void vline(vlinex,vliney,vlinex1,vliney1,color);
 void trig(x,y,size,color);
+int getkey();
 
 int main(){
 	int n;
+	int nnn;
+	int e;
+	int ee;
+	int xx;
 	int x=5;
 	int y=5;
 	int x1=50;
 	int y1=50;
 	int color=2;
 	int unsigned size=(320/8)*200; 
-	char c[80];
+	char c;
 	screens(lowega);
 	VID=getptr()+0x2000;
 	backs(VID,(int)size,blue+brish);
 	rect(0,49,319,49,blue);
-		trig(320/2,50,141,blue);
+	x=(320/2);
+	xx=-10;
+	e=2;
+	y1=55;
+
+		while(n!=27){
+		trig(x,50,150,blue);
+		refresh(VIDEO,size,VID);
+		ee=e/3;
+
+		trig(x,50,150,blue+brish);
+		y1=y1+2;
+		x=x+xx;
+		if (x<30)xx=10;
+		if (x>300)xx=-10;
+		e=e+2;
+		if (y1>25+140-ee){
+			y1=45;
+			e=2;
+		}
+		n=getkey();
+		n=n & 255;
+	}
+
+
+	
+	
+
 	refresh(VIDEO,size,VID);
 		asm	"db 0xb4,0,0xcd,0x21";
 		
@@ -451,7 +483,17 @@ void trig(x,y,size,color){
 	int ny=y;
 	int nx=x;
 	int nnx=2;
-	for(n=0;n<size;n=n+8){
-		rect(nx-n/2,ny+n,nx+n/2,ny+n+8,color);
+	for(n=0;n<size;n++){
+		rect(nx-n/2,ny+n,nx+n/2,ny+n+1,color);
 	}
+}
+
+
+int getkey()
+{
+	int *c;
+	c = (int * ) varn;
+
+		asm	"db 0x1E,0x06,0x50,0x53,0x51,0x52,0x56,0x57,0xB4,0x01,0xCD,0x16,0x75,0x09,0xB8,0x00,0x00,0x2E,0xA3,0x80,0x00,0xEB,0x09,0x90,0xB4,0x00,0xCD,0x16,0x2E,0xA3,0x80,0x00,0x90,0x5F,0x5E,0x5A,0x59,0x5B,0x58,0x07,0x1F";
+	return *(c + 0);	
 }
