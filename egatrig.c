@@ -483,8 +483,9 @@ void trig(x,y,size,color){
 	int ny=y;
 	int nx=x;
 	int nnx=2;
-	for(n=0;n<size;n=n+8){
-		rect(nx-n/2,ny+n,nx+n/2,ny+n+8,color);
+	for(n=0;n<size;n++){
+		vline(nx-n/2,ny+n,nx-n/2,ny+n+1,color);
+		vline(nx+n/2,ny+n,nx+n/2,ny+n+1,color);
 	}
 }
 
