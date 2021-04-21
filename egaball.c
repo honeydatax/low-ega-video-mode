@@ -23,8 +23,8 @@ void drawball(x,y,color);
 
 
 int main(){
-	int n;
-	int nnn;
+	int n=0;
+	int nnn=0;
 	int e;
 	int ee;
 	int xx;
