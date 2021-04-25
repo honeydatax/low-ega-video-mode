@@ -21,6 +21,8 @@ void bvertical(vlinex,vliney,vlinex1,vliney1,bytes,color);
 void brect(vlinex,vliney,vlinex1,vliney1,color);
 void trig(x,y,size,color);
 int getkey();
+void ball (x,y,color);
+
 
 int main(){
 	int n=0;
@@ -33,16 +35,13 @@ int main(){
 	int x1=50;
 	int y1=50;
 	int color=2;
-	static unsigned int cc1[]={12,27,35,42,46,49,52,54,56,57,57};
 	int unsigned size=(320/8)*200; 
 	char c[80];
 	screens(lowega);
 	VID=getptr()+0x2000;
 	backs(VID,(int)size,blue+brish);
-	for(n=0;n<11;n++){
-		brect(x-cc1[n],y+n*5,x+cc1[n],y+n*5+5,blue);
-		brect(x-cc1[n],(55*2)+y-n*5-5,x+cc1[n],(55*2)+y-n*5,blue);
-		
+	for(n=0;n<8;n++){
+		ball(60+n*8,8+n*8,n+1);
 	}
 		refresh(VIDEO,size,VID);
 
@@ -643,4 +642,15 @@ int getkey()
 
 		asm	"db 0x1E,0x06,0x50,0x53,0x51,0x52,0x56,0x57,0xB4,0x01,0xCD,0x16,0x75,0x09,0xB8,0x00,0x00,0x2E,0xA3,0x80,0x00,0xEB,0x09,0x90,0xB4,0x00,0xCD,0x16,0x2E,0xA3,0x80,0x00,0x90,0x5F,0x5E,0x5A,0x59,0x5B,0x58,0x07,0x1F";
 	return *(c + 0);	
+}
+
+
+void ball (x,y,color){
+	static unsigned int cc1[]={12,27,35,42,46,49,52,54,56,57,57};
+	int n;
+	for(n=0;n<11;n++){
+		brect(x-cc1[n],y+n*5,x+cc1[n],y+n*5+5,color);
+		brect(x-cc1[n],(55*2)+y-n*5-5,x+cc1[n],(55*2)+y-n*5,color);
+		
+	}
 }
