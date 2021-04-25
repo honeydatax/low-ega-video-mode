@@ -646,11 +646,16 @@ int getkey()
 
 
 void ball (x,y,color){
-	static unsigned int cc1[]={12,27,35,42,46,49,52,54,56,57,57};
+	static signed int cc1[]={12,27,35,42,46,49,52,54,56,57,57,57,57,57,57};
 	int n;
+	int nn;
+	int e;
+	int ee;
 	for(n=0;n<11;n++){
-		brect(x-cc1[n],y+n*5,x+cc1[n],y+n*5+5,color);
-		brect(x-cc1[n],(55*2)+y-n*5-5,x+cc1[n],(55*2)+y-n*5,color);
-		
+		e=(cc1[n+1]-cc1[n])/5;
+		for(nn=0;nn<5;nn++){
+			brect(x-cc1[n]-(e*nn),y+n*5+nn,x+cc1[n]+e*nn,y+n*5+nn+1,color);
+			brect(x-cc1[n]-e*(5-nn),(55*2)+y-n*5+nn-1,x+cc1[n]+e*(5-nn),(55*2)+y-n*5+nn,color);
+		}
 	}
 }
